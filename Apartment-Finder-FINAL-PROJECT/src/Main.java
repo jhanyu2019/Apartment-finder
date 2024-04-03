@@ -86,7 +86,7 @@ public class Main {
     System.out.println("Apartment Results:");
     for (Apartment apartment : apartments) {
       System.out.println("ID: " + apartment.getId());
-      System.out.println("Name: " + apartment.getName());
+      System.out.println("Property_url: " + apartment.getName());
       System.out.println("Price: " + apartment.getPrice());
       System.out.println("Distance: " + apartment.getDistance() + " minutes");
       System.out.println("--------------------");
