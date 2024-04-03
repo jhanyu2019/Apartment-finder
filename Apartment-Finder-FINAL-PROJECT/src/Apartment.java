@@ -2,16 +2,16 @@ import java.util.List;
 
 public class Apartment {
   private int mls_id;
-  private String mls;
+  private String property_url;
   private int list_price;
   private int distance;
 
   private boolean hasGym;
   private boolean isPetFriendly;
 
-  public Apartment(int mls_id, String mls, int list_price, int distance, boolean hasGym, boolean isPetFriendly) {
+  public Apartment(int mls_id, String property_url, int list_price, int distance, boolean hasGym, boolean isPetFriendly) {
     this.mls_id = mls_id;
-    this.mls = mls;
+    this.property_url = property_url;
     this.list_price = list_price;
     this.distance = distance;
 
@@ -24,7 +24,7 @@ public class Apartment {
   }
 
   public String getName() {
-    return mls;
+    return property_url;
   }
 
   public int getPrice() {
@@ -61,7 +61,7 @@ public class Apartment {
   public String toString() {
     return "Apartment{" +
             "id=" + mls_id +
-            ", name='" + mls + '\'' +
+            ", property_url='" + property_url + '\'' +
             ", price=" + list_price +
             ", distance=" + distance +
             '}';
