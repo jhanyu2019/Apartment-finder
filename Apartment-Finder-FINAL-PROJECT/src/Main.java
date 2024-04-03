@@ -8,7 +8,7 @@ import java.util.List;
 public class Main {
   public static void main(String[] args) {
 
-    String apartmentsJson = readJsonFile("milton.json");
+    String apartmentsJson = readJsonFile("database.json");
 
 
     ApartmentSearcher searcher = new ApartmentSearcher();
