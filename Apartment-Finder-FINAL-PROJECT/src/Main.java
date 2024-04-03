@@ -1,4 +1,4 @@
-
+import java.nio.file.Paths;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -8,8 +8,8 @@ import java.util.List;
 public class Main {
   public static void main(String[] args) {
 
-    String apartmentsJson = readJsonFile("database.json");
-
+    String filePath = Paths.get("Apartment-Finder-FINAL-PROJECT", "database.json").toString();
+    String apartmentsJson = readJsonFile(filePath);
 
     ApartmentSearcher searcher = new ApartmentSearcher();
     searcher.addApartments(apartmentsJson);
