@@ -1,31 +1,48 @@
-import java.util.List;
-
 public class Apartment {
-  private int mls_id;
-  private String mls;
+  private String mls_id;
+  private String property_url;
   private int list_price;
   private int distance;
-
   private boolean hasGym;
   private boolean isPetFriendly;
+  private double garage;
+  private int numberOfBeds;
+  private String city;
+  private String street;
 
-  public Apartment(int mls_id, String mls, int list_price, int distance, boolean hasGym, boolean isPetFriendly) {
+
+
+  public Apartment(String mls_id, String property_url, String city, String street,  int list_price,
+                   int distance, boolean hasGym, boolean isPetFriendly, double garage, int numberOfBeds) {
     this.mls_id = mls_id;
-    this.mls = mls;
+    this.property_url = property_url;
     this.list_price = list_price;
     this.distance = distance;
+    this.city = city;
+    this.street = street;
 
     this.hasGym = hasGym;
     this.isPetFriendly = isPetFriendly;
+    this.garage = garage;
+    this.numberOfBeds = numberOfBeds;
   }
 
-  public int getId() {
+  public String getId() {
     return mls_id;
   }
 
   public String getName() {
-    return mls;
+    return property_url;
   }
+
+  public String getCity() {
+    return city;
+  }
+
+  public String getStreet() {
+    return street;
+  }
+
 
   public int getPrice() {
     return list_price;
@@ -35,9 +52,7 @@ public class Apartment {
     return distance;
   }
 
-
-
-  public boolean isHasGym() {
+  public boolean hasGym() {
     return hasGym;
   }
 
@@ -45,15 +60,14 @@ public class Apartment {
     return isPetFriendly;
   }
 
-
-  public void setHasGym(boolean hasGym) {
-    this.hasGym = hasGym;
+  public double getGarage() {
+    return garage;
   }
 
-
-  public void setPetFriendly(boolean isPetFriendly) {
-    this.isPetFriendly = isPetFriendly;
+  public int getNumberOfBeds(){
+    return numberOfBeds;
   }
+
 
 
 
@@ -61,9 +75,15 @@ public class Apartment {
   public String toString() {
     return "Apartment{" +
             "id=" + mls_id +
-            ", name='" + mls + '\'' +
+            ", property_url='" + property_url + '\'' +
+            ", city=" + city +
+            ", street=" + street +
             ", price=" + list_price +
             ", distance=" + distance +
+            ", number of bedrooms=" + numberOfBeds +
+            ", hasGym=" + hasGym +
+            ", isPetFriendly=" + isPetFriendly +
+            ", garage=" + garage +
             '}';
   }
 
