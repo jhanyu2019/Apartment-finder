@@ -3,6 +3,12 @@ import java.util.List;
 
 public class ApartmentCluster {
   private List<Apartment> apartments;
+  private static final double WEIGHT_GYM = 20.0;
+  private static final double WEIGHT_PET_FRIENDLY = 20.0;
+  private static final double WEIGHT_GARAGE = 15.0;
+  private static final double WEIGHT_BEDS = 15.0;
+  private static final double WEIGHT_BUDGET = 30.0;
+  private static final double WEIGHT_DISTANCE = 30.0;
 
   public ApartmentCluster() {
     this.apartments = new ArrayList<>();
@@ -13,32 +19,37 @@ public class ApartmentCluster {
   }
 
   public double calculateFit(Apartment apartment, UserPreferences preferences) {
-    double fitScore = 0.0;
+    double fitScore = 100.0;
 
-    // Boolean preferences
-    if (preferences.requiresGym() && !apartment.hasGym()) {
-      fitScore += 1;
-    }
-    if (preferences.requiresPetFriendly() && !apartment.isPetFriendly()) {
-      fitScore += 1;
+    if (!apartment.isPetFriendly() && preferences.requiresPetFriendly()) {
+      fitScore -= WEIGHT_PET_FRIENDLY;
     }
 
-    // Numerical preferences - garage and beds
-    fitScore += Math.abs(apartment.getGarage() - preferences.getGarage());
-    fitScore += Math.abs(apartment.getNumberOfBeds() - preferences.getNumberOfBeds());
-
-    // Budget
-    if (apartment.getPrice() < preferences.getMinBudget() || apartment.getPrice() > preferences.getMaxBudget()) {
-      fitScore += 1; // Or calculate based on how far it is from the range
+    if (!apartment.hasGym() && preferences.requiresGym()) {
+      fitScore -= WEIGHT_GYM;
     }
 
-    // Distance
+    if (apartment.getNumberOfBeds() != preferences.getNumberOfBeds()) {
+      fitScore -= Math.abs(apartment.getNumberOfBeds() - preferences.getNumberOfBeds()) * WEIGHT_BEDS;
+    }
+
+    if (apartment.getGarage() != preferences.getGarage()) {
+      fitScore -= Math.abs(apartment.getGarage() - preferences.getGarage()) * WEIGHT_GARAGE;
+    }
+
+    if (apartment.getPrice() >= preferences.getMaxBudget()) {
+      fitScore -= (preferences.getMaxBudget() - apartment.getPrice()) / WEIGHT_BUDGET;
+    }
+
     if (apartment.getDistance() > preferences.getMaxDistance()) {
-      fitScore += (apartment.getDistance() - preferences.getMaxDistance());
+      fitScore -= (apartment.getDistance() - preferences.getMaxDistance()) * WEIGHT_DISTANCE;
     }
 
-    return fitScore;
+    return Math.max(0, fitScore);
   }
+
+
+
 
 
   public List<Apartment> getApartments() {
